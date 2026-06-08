@@ -1,0 +1,58 @@
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs:rw
+      - ./nginx/vhost.d:/etc/nginx/vhost.d:ro
+      - nginx-html:/usr/share/nginx/html
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  acme-companion:
+    image: nginxproxy/acme-companion:latest
+    container_name: acme-companion
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx-certs:/etc/nginx/certs:rw
+      - ./nginx/vhost.d:/etc/nginx/vhost.d:rw
+      - nginx-html:/usr/share/nginx/html
+      - acme-state:/etc/acme.sh
+    networks:
+      - app-network
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    restart: unless-stopped
+    depends_on:
+      - nginx-proxy
+
+  app:
+    image: okelo/daytrip-app:latest
+    env_file:
+      - .env.production
+    container_name: daytrip-app
+    environment:
+      - VIRTUAL_HOST=daytrip.yunn.space
+      - VIRTUAL_PORT=8000
+      - LETSENCRYPT_HOST=daytrip.yunn.space
+      - LETSENCRYPT_EMAIL=tzuyun124@gmail.com
+      - VIRTUAL_PROTO=http
+      - HTTPS_METHOD=redirect
+    networks:
+      - app-network
+    expose:
+      - 8000
+
+volumes:
+  nginx-certs:
+  nginx-html:
+  acme-state:
+
+networks:
+  app-network:
+    driver: bridge

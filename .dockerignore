@@ -1,6 +1,7 @@
 # 環境檔
 .env
 *.env
+.env*
 
 # Python 編譯結果
 __pycache__/
@@ -12,6 +13,7 @@ __pycache__/
 .vscode/
 .idea/
 .DS_Store
+*.md
 
 # 測試資料與記錄檔
 *.log
@@ -22,3 +24,5 @@ __pycache__/
 # Git 版本控制
 .git/
 .gitignore
+
+nginx.conf

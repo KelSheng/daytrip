@@ -7,7 +7,7 @@ dbconfig = {
 "host": os.getenv("MYSQL_HOST"),
 "user": os.getenv("MYSQL_USER"),
 "password": os.getenv("MYSQL_PASSWORD"),
-"database": os.getenv("MYSQL_DATABASE_02"),
+"database": os.getenv("MYSQL_DATABASE"),
 "port":3306
 }
 cnxpool = pooling.MySQLConnectionPool(pool_name="mypool", pool_size=5, **dbconfig)

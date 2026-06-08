@@ -4,3 +4,5 @@ python-dotenv
 tappay
 pydantic[email]
 mysql-connector-python
+passlib
+pyjwt
