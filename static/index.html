@@ -1,11 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Index</title>
-</head>
-<body>
-  
-</body>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taipei Day Trip 台北一日遊</title>
+    <link rel="stylesheet" href="/static/css/homepage.css" />
+    <script src="https://cdn.jsdelivr.net/npm/validator@13.9.0/validator.min.js"></script>
+    <script
+      type="module"
+      src="/static/js/controller/homepage.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <dialog class="sign-in-popup">
+      <div class="gradient-bar"></div>
+      <img
+        src="/static/img/icon_close.png"
+        alt="關閉"
+        id="close-sign-in-popup"
+      />
+      <div class="sign-in">
+        <h4>登入會員帳號</h4>
+        <form id="sign-in-form">
+          <input type="email" placeholder="輸入電子信箱" id="sign-in-email" />
+          <input type="password" placeholder="輸入密碼" id="sign-in-pwd" />
+          <button type="button" id="sign-in-submit-btn">登入帳戶</button>
+        </form>
+        <p id="sign-in-response"></p>
+        <button type="button" id="to-sign-up">還沒有帳戶？點此註冊</button>
+      </div>
+    </dialog>
+    <dialog class="sign-up-popup">
+      <div class="gradient-bar"></div>
+      <img
+        src="/static/img/icon_close.png"
+        alt="關閉"
+        id="close-sign-up-popup"
+      />
+      <div class="sign-up">
+        <h4>註冊會員帳號</h4>
+        <form id="sign-up-form">
+          <input type="text" placeholder="輸入姓名" id="sign-up-name" />
+          <input type="email" placeholder="輸入電子信箱" id="sign-up-email" />
+          <input type="password" placeholder="輸入密碼" id="sign-up-pwd" />
+          <button type="button" id="sign-up-submit-btn">註冊新帳戶</button>
+        </form>
+        <p id="sign-up-response"></p>
+        <button type="button" id="to-sign-in">已經有帳戶了？點此登入</button>
+      </div>
+    </dialog>
+    <header>
+      <div class="header">
+        <div class="header-left">
+          <h1>台北一日遊</h1>
+        </div>
+        <div class="header-right">
+          <a href="#" id="booking-btn"><div>預定行程</div></a>
+          <a href="#"> <div class="sign-in-or-sign-up"></div></a>
+        </div>
+      </div>
+    </header>
+    <section id="hero">
+      <div>
+        <h4>輕鬆享受台北一日悠閒</h4>
+        <p>探索每個角落，體驗城市的深度旅遊行程</p>
+        <search>
+          <form>
+            <input
+              type="search"
+              id="keyword"
+              placeholder="輸入景點名稱查詢"
+            /><button type="button" id="search-button">
+              <img src="/static/img/icon_search.png" alt="search-icon" />
+            </button>
+          </form>
+        </search>
+      </div>
+    </section>
+    <nav>
+      <img src="/static/img/left-arrow.png" alt="butoon-left" id="left-btn" />
+      <div id="mrt-list"></div>
+      <img
+        src="/static/img/right-arrow.png"
+        alt="butoon-right"
+        id="right-btn"
+      />
+    </nav>
+    <main><section id="attraction-section"></section></main>
+    <div id="observer-target"></div>
+    <footer>
+      <p>COPYRIGHT © 2021 台北一日遊</p>
+    </footer>
+    <template id="attraction-template">
+      <div class="attraction">
+        <a href="">
+          <figure>
+            <img alt="" src="" />
+            <figcaption class="attraction-name"></figcaption>
+          </figure>
+          <div class="attraction-tag">
+            <p class="attraction-category"></p>
+            <p class="attraction-mrt"></p>
+          </div>
+        </a>
+      </div>
+    </template>
+    <template id="mrt-template">
+      <button class="mrt-btn"></button>
+    </template>
+  </body>
 </html>

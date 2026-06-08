@@ -1,11 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Attraction</title>
-</head>
-<body>
-  
-</body>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taipei Day Trip 台北一日遊</title>
+    <link rel="stylesheet" href="/static/css/attraction.css" />
+    <script src="https://cdn.jsdelivr.net/npm/validator@13.9.0/validator.min.js"></script>
+    <script
+      type="module"
+      src="/static/js/controller/attraction.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <dialog class="sign-in-popup">
+      <div class="gradient-bar"></div>
+      <img
+        src="/static/img/icon_close.png"
+        alt="關閉"
+        id="close-sign-in-popup"
+      />
+      <div class="sign-in">
+        <h4>登入會員帳號</h4>
+        <form id="sign-in-form">
+          <input type="email" placeholder="輸入電子信箱" id="sign-in-email" />
+          <input type="password" placeholder="輸入密碼" id="sign-in-pwd" />
+          <button type="button" id="sign-in-submit-btn">登入帳戶</button>
+        </form>
+        <p id="sign-in-response"></p>
+        <button type="button" id="to-sign-up">還沒有帳戶？點此註冊</button>
+      </div>
+    </dialog>
+    <dialog class="sign-up-popup">
+      <div class="gradient-bar"></div>
+      <img
+        src="/static/img/icon_close.png"
+        alt="關閉"
+        id="close-sign-up-popup"
+      />
+      <div class="sign-up">
+        <h4>註冊會員帳號</h4>
+        <form id="sign-up-form">
+          <input type="text" placeholder="輸入姓名" id="sign-up-name" />
+          <input type="email" placeholder="輸入電子信箱" id="sign-up-email" />
+          <input
+            type="password"
+            placeholder="建立長度 6-12 的密碼"
+            id="sign-up-pwd"
+          />
+          <button type="button" id="sign-up-submit-btn">註冊新帳戶</button>
+        </form>
+        <p id="sign-up-response"></p>
+        <button type="button" id="to-sign-in">已經有帳戶了？點此登入</button>
+      </div>
+    </dialog>
+    <header>
+      <div class="header">
+        <div class="header-left">
+          <a href="/">
+            <h1>台北一日遊</h1>
+          </a>
+        </div>
+        <div class="header-right">
+          <a href="#" id="booking-btn"><div>預定行程</div></a>
+          <a href="#"> <div class="sign-in-or-sign-up"></div></a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="top">
+        <section id="attraction-images">
+          <img
+            src="/static/img/left-arrow-img.png"
+            alt="left-arrow button for the previous image"
+            id="prev-btn"
+          />
+
+          <img
+            src="/static/img/right-arrow-img.png"
+            alt="right-arrow button for the next image"
+            id="next-btn"
+          />
+
+          <div class="indicators"></div>
+        </section>
+        <section id="attraction-booking-form">
+          <h4 id="attraction-name"></h4>
+          <p id="attraction-category"></p>
+          <div id="booking-form">
+            <h6>訂購導覽行程</h6>
+            <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
+            <span class="bold">選擇日期：</span>
+            <input type="date" class="date" id="booking-date" />
+            <form id="time-slot">
+              <span class="bold">選擇時間：</span>
+              <label>
+                <input
+                  type="radio"
+                  name="time-slot"
+                  value="上半天"
+                  id="forenoon"
+                />
+                上半天
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="time-slot"
+                  value="下半天"
+                  id="afternoon"
+                />
+                下半天
+              </label>
+            </form>
+            <span class="bold">導覽費用：</span>
+            <span id="price"> 新台幣 2500 元 </span>
+            <button id="booking-submit-btn">開始預約行程</button>
+          </div>
+        </section>
+      </section>
+      <hr />
+      <section id="attraction-info">
+        <div>
+          <p id="attraction-description"></p>
+        </div>
+        <div>
+          <h6>景點地址</h6>
+          <p id="attraction-address"></p>
+        </div>
+        <div>
+          <h6>交通方式</h6>
+          <p id="attraction-transport"></p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>COPYRIGHT © 2021 台北一日遊</p>
+    </footer>
+  </body>
 </html>
