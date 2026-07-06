@@ -12,7 +12,7 @@ user_router = APIRouter()
 
 
 @user_router.post("/api/user")
-async def sign_up(body:UserSignUp):
+def sign_up(body:UserSignUp):
 	if not body.name or not body.email or not body.password:
 		return {"error": True,"message": "請填打所有欄位"}
 	existUser = get_user_by_email(body.email)
@@ -33,7 +33,7 @@ async def verify_jwt_token(credentials: HTTPAuthorizationCredentials = Security(
 
 
 @user_router.patch("/api/user")
-async def update_name(body=Body(None) ,payload: dict = Depends(verify_jwt_token)):
+def update_name(body=Body(None) ,payload: dict = Depends(verify_jwt_token)):
 	if body["name"]:
 		update_user_data(payload["data"]["id"], name=body["name"])
 	elif body["email"]:
@@ -56,7 +56,7 @@ async def update_name(body=Body(None) ,payload: dict = Depends(verify_jwt_token)
 #     }
 
 @user_router.put("/api/user/auth")
-async def sign_in(body:UserSignIn):
+def sign_in(body:UserSignIn):
 	if not body.email or not body.password:
 		return {"error": True,"message": "請填打所有欄位"}
 	user = get_user_by_email(body.email)

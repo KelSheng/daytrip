@@ -3,7 +3,7 @@ from models.attraction import get_attractions_data_per_page, get_attractions_cou
 attraction_router = APIRouter()
 
 @attraction_router.get("/api/attractions")
-async def attractions(keyword: str = Query (default = None), page: int = Query(default = 0, ge = 0)):
+def attractions(keyword: str = Query (default = None), page: int = Query(default = 0, ge = 0)):
 	per_page=12
 	offset = page * per_page
 	if keyword:
@@ -26,7 +26,7 @@ async def attractions(keyword: str = Query (default = None), page: int = Query(d
 	return{"nextPage":next_page, "data":result_attractions}
 
 @attraction_router.get("/api/attraction/{attractionId}")
-async def attraction_by_id(attractionId:int = Path(..., ge = 1)):
+def attraction_by_id(attractionId:int = Path(..., ge = 1)):
 	result_attraction = get_attraction_by_id(attractionId)
 	if not result_attraction:
 		raise HTTPException(status_code=400, detail="無此景點編號")
@@ -34,6 +34,6 @@ async def attraction_by_id(attractionId:int = Path(..., ge = 1)):
 	return{"data":attraction_data}
 
 @attraction_router.get("/api/mrts")
-async def mrts():
+def mrts():
 	mrt_list = get_mrt_lists()
 	return{"data":mrt_list}

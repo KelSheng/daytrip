@@ -8,7 +8,7 @@ from routers.user import verify_jwt_token
 booking_router= APIRouter()
 
 @booking_router.get("/api/booking")
-async def get_booking( payload: dict = Depends(verify_jwt_token)):
+def get_booking( payload: dict = Depends(verify_jwt_token)):
 		latestBooking = get_booking_data(payload["data"]["id"])
 		if latestBooking:
 			firstImg = get_one_image_by_attraction(latestBooking["id"])
@@ -17,13 +17,13 @@ async def get_booking( payload: dict = Depends(verify_jwt_token)):
 			return{"data":None}
 
 @booking_router.post("/api/booking")
-async def create_new_booking(body: BookingAdd, payload: dict = Depends(verify_jwt_token)):
+def create_new_booking(body: BookingAdd, payload: dict = Depends(verify_jwt_token)):
 	if not body.date or not body.time:
 		return {"error": True,"message": "請選擇預定時間與日期"}
 	add_booking_data(body.attractionId, payload["data"]["id"], body.date, body.time, body.price)
 	return {"ok":True}
 
 @booking_router.delete("/api/booking")
-async def delete_booking(payload: dict = Depends(verify_jwt_token)):
+def delete_booking(payload: dict = Depends(verify_jwt_token)):
 	delete_booking_data(payload["data"]["id"])	
 	return {"ok":True}

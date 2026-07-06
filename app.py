@@ -15,7 +15,7 @@ app.include_router(order_router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Static Pages (Never Modify Code in this Block)
+# Static Pages
 @app.get("/", include_in_schema=False)
 async def index(request: Request):
 	return FileResponse("./static/index.html", media_type="text/html")
@@ -29,7 +29,7 @@ async def booking(request: Request):
 async def thankyou(request: Request):
 	return FileResponse("./static/thankyou.html", media_type="text/html")
 @app.get("/member", include_in_schema=False)
-async def thankyou(request: Request):
+async def member(request: Request):
 	return FileResponse("./static/member.html", media_type="text/html")
 
 # 錯誤處理函式

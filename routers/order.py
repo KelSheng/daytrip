@@ -14,7 +14,7 @@ load_dotenv()
 order_router = APIRouter()
 
 @order_router.post("/api/orders")
-async def create_order(body:OrderAdd, payload: dict = Depends(verify_jwt_token)):
+def create_order(body:OrderAdd, payload: dict = Depends(verify_jwt_token)):
 	date_str = datetime.utcnow().strftime("%Y%m%d")
 	suffix = uuid.uuid4().hex[:8].upper()
 	order_number= f"{date_str}{suffix}"
@@ -31,13 +31,13 @@ async def create_order(body:OrderAdd, payload: dict = Depends(verify_jwt_token))
 	return {"data":{"number":order_number,"payment":{"status":response_data_dict["status"],"message":response_data_dict["msg"]}}}
 
 @order_router.get("/api/orders")
-async def get_orders(payload: dict = Depends(verify_jwt_token)):
+def get_orders(payload: dict = Depends(verify_jwt_token)):
 	ordersData = get_orders_by_id(payload["data"]["id"])
 	return {"data":ordersData}
 
 
 @order_router.get("/api/order/{orderNumber}")
-async def get_order(orderNumber:str= Path(..., minlength=16), payload: dict = Depends(verify_jwt_token)):
+def get_order(orderNumber:str= Path(..., minlength=16), payload: dict = Depends(verify_jwt_token)):
 	order = get_order_by_number(orderNumber)
 	if order:
 		if order["status"]=="PAID":
