@@ -66,9 +66,16 @@ export function renderAttractions(attractionsData) {
       attractionA.href = `/attraction/${attractionsData["data"][i]["id"]}`;
 
       const attractionImg = attractionItem.querySelector("img");
+      const errorTextOverlay = attractionItem.querySelector(".img-error-text");
       let imgURL = attractionsData["data"][i]["images"][0];
       attractionImg.src = imgURL;
       attractionImg.alt = attractionsData["data"][i]["name"] + "的圖片";
+      attractionImg.onerror = function () {
+        errorTextOverlay.classList.remove("hidden");
+        this.src = "/static/img/broken-image.png";
+        this.classList.add("img-error-fallback");
+        this.onerror = null;
+      };
 
       const attractionName = attractionItem.querySelector("figcaption");
       attractionName.textContent = attractionsData["data"][i]["name"];
@@ -131,6 +138,10 @@ export function RenderAttractionImg(images) {
       let img = document.createElement("img");
       img.classList.add("slide");
       img.src = images[i].src;
+      img.onerror = function () {
+        this.src = "/static/img/broken-image.png";
+        this.onerror = null;
+      };
       let indicator = document.createElement("span");
       indicator.classList.add("indicator");
       if (i == 0) {
